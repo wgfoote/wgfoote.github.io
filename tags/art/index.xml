@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Art on varium et mutabile</title>
+    <link>/tags/art/</link>
+    <description>Recent content in Art on varium et mutabile</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/art/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Draw Anything</title>
+      <link>/2020/07/01/draw-anything/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/07/01/draw-anything/</guid>
+      <description>The only wayMaterialsA processDemonstrationThe only wayThe only way to learn how to draw is to draw, incessantly, passionately, anything. Drawing is as much about careful and heart-felt observation as anything else. There are practices, some rules, but these are learned along the way, a felt-memory as we touch objects with our minds and feelings, here through the tip of a pencil on a piece of paper.</description>
+    </item>
+    
+  </channel>
+</rss>

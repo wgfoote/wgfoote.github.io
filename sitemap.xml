@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>/tags/art/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/art/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
   </url>
@@ -19,6 +24,16 @@
   
   <url>
     <loc>/categories/computing/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/07/01/draw-anything/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/drawing/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
   </url>
   
@@ -69,6 +84,11 @@
   
   <url>
     <loc>/categories/statistics/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/still-life/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
   </url>
   
