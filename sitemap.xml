@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/about/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/art/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
   </url>
@@ -73,18 +78,13 @@
   </url>
   
   <url>
-    <loc>/2020/07/01/welcome-r-philosophy-statistics-economics-finance-analytics/</loc>
+    <loc>/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/about/</loc>
-    <lastmod>2016-05-05T21:48:51-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+    <loc>/2020/07/01/welcome-r-philosophy-statistics-economics-finance-analytics/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

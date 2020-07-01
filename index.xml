@@ -6,10 +6,21 @@
     <description>Recent content on varium et mutabile</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 May 2016 21:48:51 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About Bill Foote</title>
+      <link>/about/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>I am a Visiting Associate Professor, Accounting, CIS &amp;amp; Law at Manhattan College.
+My professional work rides the seams between economics, finance, and underlying value chains, commodities, operations, and strategies. I&amp;rsquo;ve had faculty appointments at Clarkson, Syracuse, and Le Moyne as well as taught finance and economics and worked with evolving online and executive learning programs.
+During my career, I helped to build an energy and environment practice in Europe for Ernst &amp;amp; Young, led the quantitative capital markets team at Deloitte, and helped to establish new practices in enterprise risk management at Deloitte, Charles River Associates, and more recently at Alvarez &amp;amp; Marsal.</description>
+    </item>
     
     <item>
       <title>Welcome!</title>
@@ -17,23 +28,12 @@
       <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/07/01/welcome-r-philosophy-statistics-economics-finance-analytics/</guid>
-      <description>Welcome to this site. You will eventually see that I have interests span many areas including:
+      <description>Welcome to this site. You will eventually see that I have interests that span many areas including:
 Philosophy – of knowledge, of objects, of persons – and ethics and ultimately the various manifestations of spirit in the world
 Mathematical, probabilistic and statistical modeling and computing
 Art – its practice, influences, history
 Linguistics – especially indo-european and semitic languages
-Anything else as all knowledge is fair game</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>/about/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/about/</guid>
-      <description>I am Bill Foote a Visiting Associate Professor, Accounting, CIS &amp;amp; Law at Manhattan College.
-My professional work rides the seams between economics, finance, and underlying value chains, commodities, operations, and strategies. I&amp;rsquo;ve had faculty appointments at Clarkson, Syracuse, and Le Moyne as well as taught finance and economics and worked with evolving online and executive learning programs.
-During my career, I helped to build an energy and environment practice in Europe for Ernst &amp;amp; Young, led the quantitative capital markets team at Deloitte, and helped to establish new practices in enterprise risk management at Deloitte, Charles River Associates, and more recently at Alvarez &amp;amp; Marsal.</description>
+Anything else – as all knowledge is fair game</description>
     </item>
     
   </channel>
