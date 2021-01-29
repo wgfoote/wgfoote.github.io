@@ -1,0 +1,340 @@
+---
+title: There's logic behind that inference
+author: Bill Foote
+date: '2020-07-03'
+slug: there-s-logic-behind-that-inference
+categories:
+  - Philosophy
+  - Statistics
+tags:
+  - Hypothsis Testing
+  - Logic
+  - Epistemology
+bibliography: [bibliography.bib]
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+#
+library(visNetwork)
+```
+
+<style>
+.boxed {
+  border: 5px solid green;
+  border-radius: 5px;
+  padding: 50px;
+  margin: 20px;
+  background-color: #f8f8fa
+}
+
+button{
+color: white;
+background-color: green; /* Remove background color */
+border: 2px solid green; /* Border thickness, line style, and color */
+*/border-radius: 5px; /* Adds curve to border corners */*/
+text-transform: uppercase; /* Make letters uppercase */
+ 
+}
+</style>
+<script>
+function showText(y) {
+    var button = document.querySelector('.toggle')
+    var x = document.getElementById(y);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        button.innerHTML = "Hide";
+    } else {
+        x.style.display = "none";
+        button.innerHTML = "Show";
+    }
+}
+</script>
+
+## Welcome to Statistical Reasoning
+
+You may, or may not, realize that you have been thinking statistically all your like. Try these questions on for size. Have you ever thought or uttered:
+
+- I probably have!
+
+- On average classes here are very hard!
+
+- How often can I skip a meeting before they fire me?
+
+- How sure am I that I will get promoted?
+
+If you have ever made (or thought) statements and questions like these, you are _de facto_ thinking statistically. This sort of reasoning starts from the gathering of cases, observations, and through classifying, measuring, deliberation, forming new concepts and hypotheses, and framing our tolerance for error to test hypotheses, we arrive at a claim about whatever we think then is true or false (probably: because we admit we might be wrong or refutable!). Through this process, and it is ongoing, we discriminate our subjective opinions from objective knowledge that a claim is true or not. That is the core of evidence-based critical thinking. [^understanding]
+
+[^understanding]: See @Potter_1994
+
+### Why do we reason statistically?
+
+Consider that:
+
+- We very well know our exprerience of ignorance
+
+- We are often prone to error (and try to learn from our mistakes!)
+
+- We still have to make assertions of all sorts when we decide to act on anything
+
+The ground of statistical reasoning is that we experience both necessities and contingencies. Some ewxperiences are so direct they are known certainly, without a doubt, and might not even be subject to further revision. An example of a necessity is our experience of health: if we do not eat, we will eventually, and necessarily become very ill. Other experiences are contingent, that is, they depend on the fulfillment of conditions to exist. An example of a contingency comes from our inability to exhaustively enumerate every type and instance of an act. Will I pass this course? Maybe, probably, possibly, but not certainly. 
+
+One test of necessity versus contingency in an act or being is thus certainty. Are there further questions and conditions? Then we have contingency. Statistics and statistical thinking is all about what we probably know is true or not. Getting to this affirmation we must pass through stages of presentation of data and understanding for inference. Only then do we perform the conscious act of affirmation. After that it is up to the decision maker.
+
+### What is statisical reasoning?
+
+Statistical reasoning is a process for **generating knowledge under uncertainty**.
+
+- a **process** has inputs, activities (including decisions), and outputs, so what are the inputs, operations, results?
+
+- To **generate** something is to develop (i.e, specify, design) and implement (i.e., build, test, operate, update) something, so what would we develop and implement?
+
+- **Under uncertqainty** means possibly, maybe, and more exacting, probably
+
+**Knowledge** is not just
+
+- taking a look: knowing **about** some_thing_ or action
+
+- understanding: describing, explaining, knowing **how**
+
+These are components of knowledge, but we want results, we want a **judgement** that is reasonable after weighing the pros and cons and consulting our priorities! Our definition of knowledge is formally **justified true belief** [see Plato's _Theaetetus 210a-b_ for details!](http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0172%3Atext%3DTheaet.%3Asection%3D210a)):
+
+- A truth-claim and certitude that something is or not (probably), 
+
+- That is based on available evidence against justified true belief
+
+- as well as relevant methodology
+
+Knowledge thus includes truth-claims that we are aware of this or that and might even understand how they came about.
+
+- Above all knowledge is an assertion and thus we can expect the judgment (assertion or claim) to be justified (warranted) or not depending on the evidence.
+
+- Judgment is a conscious activity based on meaning: thus something that can be thought about, deliberated, doubted, entertained as a hypothesis, and believed to be true.
+
+- We move from knowing about (description and explanation) to knowing how (using a conceptual framework) to knowing that something is TRUE or FALSE (what any proposition is).
+
+- With uncertainty about the future we append **probably* TRUE or FALSE.
+
+Note that your _opinion_ is not _knowledge_. Beliefs are to be ever challenged by evidence, inquiry, investigation, and the discovering of new relationships and systems. Opinion, true or not, is relative to you. Knowledge moves from something just relative to you to the real relationships among things other than you and your brilliant ideas. Having said this, opinion is still a valuable entree into any investigation and may even be part of the data collection you use to investigate a question, a doubt, an hypothesis, or a belief.
+
+## Let's learn some more from this example:
+
+Overall for the purposes of statistical reasoning there are always three broad components of knowledge and a product:
+
+1. Data collection: results in observations, data, imagination, memory, perception
+
+2. Data analysis: results in description and explanation including logic, relations, classification, association, measurement, hypothesis formation, testing in the presence of potential error
+
+3. Results: the product is an affirmation based on an inference that something is or is not backed by 1 and 2
+
+Suppose that we have data on the incomes of 1000 U.S. families in 2009. 
+
+- This data can be summarized by finding the average family income and the spread of these family incomes above and below the average. 
+
+- The data also can be depicted by constructing a table, chart, or graph of the number or proportion of
+families in each income class or subsetted (filtered) by state of household residence.
+
+- We propose to test our concept of the level of the family income in the US overall.
+
+Is this last statement descriptive or inferential?",
+    
+1. It is explanatory because it calculates the proportion of families in each income class.
+    
+2. It is descriptive because of the calculate of average family income.
+    
+3. It is inferential because we can test whether family income in the US is above the average
+
+<br>
+<button class="toggle" onclick="showText('myDIV1')">show / hide</button>
+<div class="boxed" id="myDIV1" style="display:none;"><br>
+
+Answer:
+
+3. It is inferential because we can test whether family income in the US is above the average
+    
+</div>
+<br>
+
+Now suppose we test our hypothesis that family income in the state of Nebraska is less than average family income in the U.S.
+
+- We find a non-negligible and significant difference with a probability that we are wrong about our conclusion is only 1\%. We believe that 1\% is tolerable.
+
+- Based on our data, our methodology, our tolerance for error, we affirm that family income in Nebraska is less than the average family income in the U.S.
+
+Is this last statement knowledge or just your considered opinion?
+    
+1. It is considered opinion.
+
+2. It is knowledge.
+
+3. It is neither.
+
+<br>
+<button class="toggle" onclick="showText('myDIV2')">show / hide</button>
+<div class="boxed" id="myDIV2" style="display:none;"><br>
+
+Answer:
+
+Not 1: Ask if the final result is verified in the data, nut just your conceptual framework.
+
+Not 3: Try again!
+
+The correct answer is 2.
+
+2. The result derives from a set of facts, and using relevant methodology, along with an allowance for begin wrong, thus verifiable as objectively as possible.
+
+</div>
+<br>
+
+Now suppose we wake up in 10 years and collect more data, use an improved methodology, a lower tolerance for error, and eventually affirm that we were wrong about.
+
+We conclude we are wrong in 10 years. Does this invalidate our conclusions 10 years ago necessarily?
+
+1. Yes, because the conclusion 10 years ago was, from today's point of view, just considered opinion.
+
+2. No, knowledge can change from time to time. In fact the conclusions of prior years are new data for a new investigation and in this case a new judgment about average family income.
+
+3. It is neither.
+
+<br>
+<button class="toggle" onclick="showText('myDIV3')">show / hide</button>
+<div class="boxed" id="myDIV3" style="display:none;"><br>
+
+Answer:
+
+2. The result 10 years ago derived from a set of facts, and using relevant methodology, along with an allowance for begin wrong, thus verifiable as objectively as possible. Circumstances change and so might our inferences and thus our judgments.
+
+Not 1: What it only an opinion then? Why? Wasn't it verified in the data and thus a justified true belief?
+
+Certainly not 3.
+
+</div>
+<br>
+
+### Why?
+
+We have both descriptions and explanations through inferences of the sample of family incomes. We do have
+
+- knowledge about family incomes
+
+- knowledge of the relationships of family incomes as explanatory above and below an average
+
+This is the domain of descriptive statistics. However, 
+
+- We might even be able to affirm with probability that family incomes are far or not far above the average income
+
+- Since these conclusions are subject to error, we also would have to indicate the probability of error. 
+
+These statements belong to the domain of statistical inference. This domain pushes us to an affirmation that family income in one subset of the data is less than average family income in the U.S. This affirmation is built on a bridge from data to judgment using a conceptual framework and tolerance for error. 
+
+## Digging deeper
+
+### Learn by doing this
+
+You work for as an intern for a research department of a real estate developer. 
+
+Which is the best example of knowledge?
+
+1. 50 observations of a group of business analysts,
+
+2. The steps analysts take to perform a task,
+    
+3. Most of the time between 40-50% of the analysts show up for work on time.
+
+
+<br>
+<button class="toggle" onclick="showText('myDIV4')">show / hide</button>
+<div class="boxed" id="myDIV4" style="display:none;"><br>
+
+3. You have made a probable assetion. From your and other points of view this is an example of justified true belief -- knowledge.
+
+</div>
+<br>
+
+## Infer
+
+A large part of the mechanics of statistical thinking is to formulate and make inferences, that is, judgments of fact and value.
+
+DEDUCTIVE, INDUCTIVE, AND ABDUCTIVE REASONING
+
+Reasoning is the process of using existing knowledge to draw conclusions, make predictions, or construct explanations. Three methods of reasoning are the deductive, inductive, and abductive approaches.
+
+### Deductive reasoning: conclusion guaranteed
+
+Deductive reasoning starts with the assertion of a general rule and proceeds from there to a guaranteed specific conclusion. Deductive reasoning moves from the general rule to the specific application: In deductive reasoning, if the original assertions are true, then the conclusion must also be true. For example, math is deductive:
+
+- If x = 4
+- And if y = 1
+- Then 2x + y = 9
+
+In this example, it is a logical necessity that 2x + y equals 9; 2x + y must equal 9. As a matter of fact, formal, symbolic logic uses a language that looks rather like the math equality above, complete with its own operators and syntax. But a deductive syllogism (think of it as a plain-English version of a math equality) can be expressed in ordinary language:
+
+In the syllogism above, the first two statements, the propositions or premises, lead logically to the third statement, the conclusion. Here is another example:
+
+- A video streaming technology ought to be funded if it has been used successfully to educate adults.
+
+- Hybrid open classrooms are being used to educate adults successfully in more than 70 new educational environments.
+
+- Hybrid (sunchronous and asynchronous) classrooms and video streaming technology should be funded.
+
+The conclusion to fund both classrooms and technology follows the truth of the success of both treatments to educate adults successfully.
+
+Here is an example of a false conclusion reached through a correct deductive process.
+
+- There is no such thing as drought in the midwest.
+
+- North Dakota is in the mid-West.
+
+- North Dakota does not have to plan for a drought.
+
+In the example above, though the inferential process itself is valid, the conclusion is false because the premise is questionable, thus this deduction cannot guarantee a necessary true conclusion,
+
+Some might argue that there is no new knowledge through logical deduction. Their idea is that if conclusions contain the terms of the premise, then there is nothing new in the conclusion. This is a view held for example by John Stuart Mill
+
+Assuming the propositions are sound, the rather stern logic of deductive reasoning can give you absolutely certain conclusions. However, deductive reasoning cannot really increase human knowledge (it is nonampliative) because the conclusions yielded by deductive reasoning are tautologies-statements that are contained within the premises and virtually self-evident. Therefore, while with deductive reasoning we can make observations and expand implications, we cannot make predictions about future or otherwise non-observed phenomena.
+
+### Inductive reasoning: conclusion merely likely
+
+Inductive reasoning begins with observations that are specific and limited in scope, and proceeds to a generalized conclusion that is likely, but not certain, in light of accumulated evidence. You could say that inductive reasoning moves from the specific to the general. Much scientific research is carried out by the inductive method: gathering evidence, seeking patterns, and forming a hypothesis or theory to explain what is seen.
+
+Conclusions reached by the inductive method are not logical necessities: no amount of inductive evidence guarantees the conclusion. This is because there is no way to know that all the possible evidence has been gathered, and that there exists no further bit of unobserved evidence that might invalidate the hypothesis. Thus, while the newspapers might report the conclusions of scientific research as absolutes, scientific literature itself uses more cautious language, the language of inductively reached, probable conclusions.
+
+Because inductive conclusions are not logical necessities, inductive arguments are **not simply true**. Rather, they are **cogent: that is, the evidence seems complete, relevant, and generally convincing, and the conclusion is therefore probably true**. Nor are inductive arguments simply false; rather, they are not cogent.
+
+It is an important difference from deductive reasoning that, while inductive reasoning cannot yield an absolutely certain conclusion, it can actually increase human knowledge (it is ampliative). It can make predictions about future events or as-yet unobserved phenomena.
+
+For example, Albert Einstein observed the movement of a pocket compass when he was five years old and became fascinated with the idea that something invisible in the space around the compass needle was causing it to move. This observation, combined with additional observations (of moving trains, for example) and the results of logical and mathematical tools (deduction), resulted in a rule that fit his observations and could predict events that were as yet unobserved.
+
+### Abductive reasoning: taking your best shot
+
+Abductive reasoning begins with whatever information you have on hand. When you reason this way you take that information and abduce (from the Latin _aducere_ to lead from) a probable explanation. The problem is that our information is nearly always incomplete. It might be not only incomplete but also not very credible.
+
+Example of abduction reasoning include medical diagnoses, identification of assailants, the success of a never before seen product in a completely new and unknown market, the validity of any test results when test reported are bribed. 
+
+- Given a result (I have a high fever, focus groups would buy the product, test results are better than ever), and
+
+- set of symptoms, observations from a focus group, test results
+
+- is an application of abductive reasoning: given this set of symptoms, what is the diagnosis that would best explain most of them? Likewise, when jurors hear evidence in a criminal case, they must consider whether the prosecution or the defense has the best explanation to cover all the points of evidence. While there may be no certainty about their verdict, since there may exist additional evidence that was not admitted in the case, they make their best guess based on what they know.
+
+While cogent inductive reasoning requires that the evidence that might shed light on the subject be fairly complete, whether positive or negative, abductive reasoning is characterized by lack of completeness, either in the evidence, or in the explanation, or both. A patient may be unconscious or fail to report every symptom, for example, resulting in incomplete evidence, or a doctor may arrive at a diagnosis that fails to explain several of the symptoms. Still, he must reach the best diagnosis he can.
+
+The abductive process can be creative, intuitive, even revolutionary.2 Einstein's work, for example, was not just inductive and deductive, but involved a creative leap of imagination and visualization that scarcely seemed warranted by the mere observation of moving trains and falling elevators. In fact, so much of Einstein's work was done as a "thought experiment" (for he never experimentally dropped elevators), that some of his peers discredited it as too fanciful. Nevertheless, he appears to have been right-until now his remarkable conclusions about space-time continue to be verified experientially.
+
+## Critical thinking
+
+What is thinking? We have already defined **knowledge** as _justified true belief_. Thinking is the process of getting to a belief that is both true and justified. The process yields tables of experiences as data and frameworks and methodologies to understand the relationships, credibility, completeness, sufficiency, and relevance of the data to the problem at hand.
+
+Why critical? The origin of the word critical is from the Greek verb **kritein** which means _to judge_. In its root sense then, when we are critical, we are judging. But the very act o judging is built on acts of experience and understanding (or lack thereof!). A judgment occurs at the nexus of what is weighed, pro and con, raised from acts of understanding data in the light of premisses, scenarios, and hypotheses. New judgments then become new data to be experienced, understood, and weighed into new judgments. Some new judgments derive from new data that shows that previous judgment are probably not justifiable, and thus should not be believed.
+
+Every judgment of what probably is (true) or is not (false) is then justified by solid understanding of relevent, and sufficient, experiences. The error of past data, understanding, and judgment occurs when any of these artifacts are no longer relevant, sufficient, complete (enough), or any longer reasonable, thus no longer justified. Most of our knowledge is belief about what we are very confident to be probably true or not true. Confidence and probability can be used hand in hand. Highly confident means also a low tolerance for error. We know what is or is not probably in any case, but overlaying an interpretation confidence and error fills out a picture of belief, as well as justification of judgments.
+
+So, then we might summarize that so-called critical thinking is the development of justified true beliefs subjective to tolerances for error and processes for the correction of error all in the context of experience and understanding.
+
+Here is a great resource on defining and implementing [critical thinking](https://hbswk.hbs.edu/archive/the-path-to-critical-thinking).
+
+## References and Endnotes

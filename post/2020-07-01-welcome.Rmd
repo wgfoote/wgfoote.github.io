@@ -1,0 +1,30 @@
+---
+title: Welcome!
+author: Bill Foote
+date: '2020-07-01'
+slug: welcome-r-philosophy-statistics-economics-finance-analytics
+categories:
+  - R
+  - Statistics
+  - Philosophy
+  - Mathematics
+  - Computing
+  - Linguistics
+  - Art
+tags: [R, Statistics, Philosophy, Linguistics]
+---
+Welcome to this site. You will eventually see that I have interests that span many areas including:
+
+- Philosophy -- of knowledge, of objects, of persons -- and ethics and ultimately the various manifestations of spirit in the world
+
+- Mathematical, probabilistic and statistical modeling and computing
+
+- Art -- its practice, influences, history
+
+- Linguistics -- especially indo-european and semitic languages
+
+- Anything else -- as all knowledge is fair game
+
+Together we will traverse these domains, marvel at their connectivity, and I hope together discover new insights in the decisions we all make.
+
+The now current handle on this site is a very short quote from [Vergil Aeneid 4](https://archive.org/details/virgilsneidboo00virg) _varium et mutabile semper_ especially in regards to the topics here. While everything seems to be on the move, we should be always be aware, and undertand, a call to action. 

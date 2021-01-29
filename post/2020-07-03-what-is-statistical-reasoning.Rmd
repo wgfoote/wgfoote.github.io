@@ -1,0 +1,256 @@
+---
+title: What is statistical reasoning?
+author: Bill Foote
+date: '2020-07-03'
+slug: what-is-statistical-reasoning
+categories:
+  - Philosophy
+  - Statistics
+tags:
+  - Epistemology
+  - Methodology
+bibliography: [bibliography.bib]
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+#
+library(visNetwork)
+```
+
+<style>
+.boxed {
+  border: 5px solid green;
+  border-radius: 5px;
+  padding: 50px;
+  margin: 20px;
+  background-color: #f8f8fa
+}
+
+button{
+color: white;
+background-color: green; /* Remove background color */
+border: 2px solid green; /* Border thickness, line style, and color */
+*/border-radius: 5px; /* Adds curve to border corners */*/
+text-transform: uppercase; /* Make letters uppercase */
+ 
+}
+</style>
+<script>
+function showText(y) {
+    var button = document.querySelector('.toggle')
+    var x = document.getElementById(y);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        button.innerHTML = "HIDE";
+    } else {
+        x.style.display = "none";
+        button.innerHTML = "SHOW";
+    }
+}
+</script>
+
+## Welcome to Statistical Reasoning
+
+You may, or may not, realize that you have been thinking statistically all your like. Try these questions on for size. Have you ever thought or uttered:
+
+- I probably have!
+
+- On average classes here are very hard!
+
+- How often can I skip a meeting before they fire me?
+
+- How sure am I that I will get promoted?
+
+If you have ever made (or thought) statements and questions like these, you are _de facto_ thinking statistically. If you have ever been in error or made mistakes it is plausable that the source of the problem you had is in a bias. 
+
+This sort of reasoning starts from the gathering of cases, observations, and through classifying, measuring, deliberation, forming new concepts and hypotheses, and framing our tolerance for error to test hypotheses, we arrive at a claim about whatever we think then is true or false (probably: because we admit we might be wrong or refutable!). Through this process, and it is ongoing, we discriminate our subjective opinions from objective knowledge that a claim is true or not. That is the core of evidence-based critical thinking. [^understanding]
+
+[^understanding]: See @Potter_1994, Introduction regarding truth, error, and certitude and @Lonergan_1970, chapters 6 and 7 for detailed accounts of the sources and implications of bias.
+
+### Why do we reason statistically?
+
+Consider that:
+
+- We very well know our experience of ignorance
+
+- We are often prone to error (and try to learn from our mistakes!)
+
+- We still have to make assertions of all sorts when we decide to act on anything
+
+The ground of statistical reasoning is that we experience both necessities and contingencies. Some experiences are so direct they are known certainly, without a doubt, and might not even be subject to further revision. An example of a necessity is our experience of health: if we do not eat, we will eventually, and necessarily become very ill. Other experiences are contingent, that is, they depend on the fulfillment of conditions to exist. An example of a contingency comes from our inability to exhaustively enumerate every type and instance of an act. Will I pass this course? Maybe, probably, possibly, but not certainly. 
+
+One test of necessity versus contingency in an act or being is thus certainty. Are there further questions and conditions? Then we have contingency. Statistics and statistical thinking is all about what we probably know is true or not. Getting to this affirmation we must pass through stages of presentation of data and understanding for inference. Only then do we perform the conscious act of affirmation. After that it is up to the decision maker.
+
+### What is statisical reasoning?
+
+Statistical reasoning is a process for **generating knowledge under uncertainty**.
+
+- a **process** has inputs, activities (including decisions), and outputs, so what are the inputs, operations, results?
+
+- To **generate** something is to develop (i.e, specify, design) and implement (i.e., build, test, operate, update) something, so what would we develop and implement?
+
+- **Under uncertqainty** means possibly, maybe, and more exacting, probably
+
+**Knowledge** is not just
+
+- taking a look: knowing **about** some_thing_ or action
+
+- understanding: describing, explaining, knowing **how**
+
+These are components of knowledge, but we want results, we want a **judgment** that is reasonable after weighing the pros and cons and consulting our priorities! Our definition of knowledge is formally **justified true belief** [see Plato's _Theaetetus 210a-b_ for details!](http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0172%3Atext%3DTheaet.%3Asection%3D210a)):
+
+- A truth-claim and certitude that something is or not (probably), 
+
+- That is based on available evidence against justified true belief
+
+- as well as relevant methodology
+
+Knowledge thus includes truth-claims that we are aware of this or that and might even understand how they came about.
+
+- Above all knowledge is an assertion and thus we can expect the judgment (assertion or claim) to be justified (warranted) or not depending on the evidence.
+
+- Judgment is a conscious activity based on meaning: thus something that can be thought about, deliberated, doubted, entertained as a hypothesis, and believed to be true.
+
+- We move from knowing about (description and explanation) to knowing how (using a conceptual framework) to knowing that something is TRUE or FALSE (what any proposition is).
+
+- With uncertainty about the future we append **probably* TRUE or FALSE.
+
+Note that your _opinion_ is not _knowledge_. Beliefs are to be ever challenged by evidence, inquiry, investigation, and the discovering of new relationships and systems. Opinion, true or not, is relative to you. Knowledge moves from something just relative to you to the real relationships among things other than you and your brilliant ideas. Having said this, opinion is still a valuable entree into any investigation and may even be part of the data collection you use to investigate a question, a doubt, an hypothesis, or a belief.
+
+## Let's learn some more from this example:
+
+Overall for the purposes of statistical reasoning there are always three broad components of knowledge and a product:
+
+1. Data collection: results in observations, data, imagination, memory, perception
+
+2. Data analysis: results in description and explanation including logic, relations, classification, association, measurement, hypothesis formation, testing in the presence of potential error
+
+3. Results: the product is an affirmation based on an inference that something is or is not backed by 1 and 2
+
+Suppose that we have data on the incomes of 1000 U.S. families in 2009. 
+
+- This data can be summarized by finding the average family income and the spread of these family incomes above and below the average. 
+
+- The data also can be depicted by constructing a table, chart, or graph of the number or proportion of
+families in each income class or subsetted (filtered) by state of household residence.
+
+- We propose to test our concept of the level of the family income in the US overall.
+
+Is this last statement descriptive or inferential?",
+    
+1. It is explanatory because it calculates the proportion of families in each income class.
+    
+2. It is descriptive because of the calculate of average family income.
+    
+3. It is inferential because we can test whether family income in the US is above the average
+
+<br>
+<button class="toggle" onclick="showText('myDIV1')">Show</button>
+<div class= "boxed" id="myDIV1" style="display:none;"><br>
+
+Answer:
+
+3. It is inferential because we can test whether family income in the US is above the average
+    
+</div>
+<br>
+
+Now suppose we test our hypothesis that family income in the state of Nebraska is less than average family income in the U.S.
+
+- We find a non-negligible and significant difference with a probability that we are wrong about our conclusion is only 1\%. We believe that 1\% is tolerable.
+
+- Based on our data, our methodology, our tolerance for error, we affirm that family income in Nebraska is less than the average family income in the U.S.
+
+Is this last statement knowledge or just your considered opinion?
+    
+1. It is considered opinion.
+
+2. It is knowledge.
+
+3. It is neither.
+
+<br>
+<button class="toggle" onclick="showText('myDIV2')">Show</button>
+<div class= "boxed" id="myDIV2" style="display:none;"><br>
+
+Answer:
+
+Not 1: Ask if the final result is verified in the data, nut just your conceptual framework.
+
+Not 3: Try again!
+
+The correct answer is 2.
+
+2. The result derives from a set of facts, and using relevant methodology, along with an allowance for begin wrong, thus verifiable as objectively as possible.
+
+</div>
+<br>
+
+Now suppose we wake up in 10 years and collect more data, use an improved methodology, a lower tolerance for error, and eventually affirm that we were wrong about.
+
+We conclude we are wrong in 10 years. Does this invalidate our conclusions 10 years ago necessarily?
+
+1. Yes, because the conclusion 10 years ago was, from today's point of view, just considered opinion.
+
+2. No, knowledge can change from time to time. In fact the conclusions of prior years are new data for a new investigation and in this case a new judgment about average family income.
+
+3. It is neither.
+
+<br>
+<button class="toggle" onclick="showText('myDIV3')">Show</button>
+<div class= "boxed" id="myDIV3" style="display:none;"><br>
+
+Answer:
+
+2. The result 10 years ago derived from a set of facts, and using relevant methodology, along with an allowance for begin wrong, thus verifiable as objectively as possible. Circumstances change and so might our inferences and thus our judgments.
+
+Not 1: What it only an opinion then? Why? Wasn't it verified in the data and thus a justified true belief?
+
+Certainly not 3.
+
+</div>
+<br>
+
+### Why?
+
+We have both descriptions and explanations through inferences of the sample of family incomes. We do have
+
+- knowledge about family incomes
+
+- knowledge of the relationships of family incomes as explanatory above and below an average
+
+This is the domain of descriptive statistics. However, 
+
+- We might even be able to affirm with probability that family incomes are far or not far above the average income
+
+- Since these conclusions are subject to error, we also would have to indicate the probability of error. 
+
+These statements belong to the domain of statistical inference. This domain pushes us to an affirmation that family income in one subset of the data is less than average family income in the U.S. This affirmation is built on a bridge from data to judgment using a conceptual framework and tolerance for error. 
+
+## Digging deeper
+
+### Learn by doing this
+
+You work for as an intern for a research department of a real estate developer. 
+
+Which is the best example of knowledge?
+
+1. 50 observations of a group of business analysts,
+
+2. The steps analysts take to perform a task,
+    
+3. Most of the time between 40-50% of the analysts show up for work on time.
+
+
+<br>
+<button class="toggle" onclick="showText('myDIV4')">Show</button>
+<div class= "boxed" id="myDIV4" style="display:none;"><br>
+
+3. You have made a probable assertion. From your and other points of view this is an example of justified true belief -- knowledge.
+
+</div>
+<br>
