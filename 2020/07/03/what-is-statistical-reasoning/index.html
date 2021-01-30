@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.71.0" />
+
+
+<title>What is statistical reasoning? - varium et mutabile</title>
+<meta property="og:title" content="What is statistical reasoning? - varium et mutabile">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://instagram.com/williamgfoote">Gallery</a></li>
+    
+    <li><a href="https://github.com/wgfoote">GitHub</a></li>
+    
+    <li><a href="/post/">Posts</a></li>
+    
+    <li><a href="/tags/">Tags</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">8 min read</span>
+    
+
+    <h1 class="article-title">What is statistical reasoning?</h1>
+
+    
+    <span class="article-date">2020-07-03</span>
+    
+
+    <div class="article-content">
+      
+
+<div id="TOC">
+<ul>
+<li><a href="#welcome-to-statistical-reasoning">Welcome to Statistical Reasoning</a><ul>
+<li><a href="#why-do-we-reason-statistically">Why do we reason statistically?</a></li>
+<li><a href="#what-is-statisical-reasoning">What is statisical reasoning?</a></li>
+</ul></li>
+<li><a href="#lets-learn-some-more-from-this-example">Let’s learn some more from this example:</a><ul>
+<li><a href="#why">Why?</a></li>
+</ul></li>
+<li><a href="#digging-deeper">Digging deeper</a><ul>
+<li><a href="#learn-by-doing-this">Learn by doing this</a></li>
+</ul></li>
+</ul>
+</div>
+
+<style>
+.boxed {
+  border: 5px solid green;
+  border-radius: 5px;
+  padding: 50px;
+  margin: 20px;
+  background-color: #f8f8fa
+}
+
+button{
+color: white;
+background-color: green; /* Remove background color */
+border: 2px solid green; /* Border thickness, line style, and color */
+*/border-radius: 5px; /* Adds curve to border corners */*/
+text-transform: uppercase; /* Make letters uppercase */
+ 
+}
+</style>
+<script>
+function showText(y) {
+    var button = document.querySelector('.toggle')
+    var x = document.getElementById(y);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        button.innerHTML = "HIDE";
+    } else {
+        x.style.display = "none";
+        button.innerHTML = "SHOW";
+    }
+}
+</script>
+<div id="welcome-to-statistical-reasoning" class="section level2">
+<h2>Welcome to Statistical Reasoning</h2>
+<p>You may, or may not, realize that you have been thinking statistically all your like. Try these questions on for size. Have you ever thought or uttered:</p>
+<ul>
+<li><p>I probably have!</p></li>
+<li><p>On average classes here are very hard!</p></li>
+<li><p>How often can I skip a meeting before they fire me?</p></li>
+<li><p>How sure am I that I will get promoted?</p></li>
+</ul>
+<p>If you have ever made (or thought) statements and questions like these, you are <em>de facto</em> thinking statistically. If you have ever been in error or made mistakes it is plausable that the source of the problem you had is in a bias.</p>
+<p>This sort of reasoning starts from the gathering of cases, observations, and through classifying, measuring, deliberation, forming new concepts and hypotheses, and framing our tolerance for error to test hypotheses, we arrive at a claim about whatever we think then is true or false (probably: because we admit we might be wrong or refutable!). Through this process, and it is ongoing, we discriminate our subjective opinions from objective knowledge that a claim is true or not. That is the core of evidence-based critical thinking.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<div id="why-do-we-reason-statistically" class="section level3">
+<h3>Why do we reason statistically?</h3>
+<p>Consider that:</p>
+<ul>
+<li><p>We very well know our experience of ignorance</p></li>
+<li><p>We are often prone to error (and try to learn from our mistakes!)</p></li>
+<li><p>We still have to make assertions of all sorts when we decide to act on anything</p></li>
+</ul>
+<p>The ground of statistical reasoning is that we experience both necessities and contingencies. Some experiences are so direct they are known certainly, without a doubt, and might not even be subject to further revision. An example of a necessity is our experience of health: if we do not eat, we will eventually, and necessarily become very ill. Other experiences are contingent, that is, they depend on the fulfillment of conditions to exist. An example of a contingency comes from our inability to exhaustively enumerate every type and instance of an act. Will I pass this course? Maybe, probably, possibly, but not certainly.</p>
+<p>One test of necessity versus contingency in an act or being is thus certainty. Are there further questions and conditions? Then we have contingency. Statistics and statistical thinking is all about what we probably know is true or not. Getting to this affirmation we must pass through stages of presentation of data and understanding for inference. Only then do we perform the conscious act of affirmation. After that it is up to the decision maker.</p>
+</div>
+<div id="what-is-statisical-reasoning" class="section level3">
+<h3>What is statisical reasoning?</h3>
+<p>Statistical reasoning is a process for <strong>generating knowledge under uncertainty</strong>.</p>
+<ul>
+<li><p>a <strong>process</strong> has inputs, activities (including decisions), and outputs, so what are the inputs, operations, results?</p></li>
+<li><p>To <strong>generate</strong> something is to develop (i.e, specify, design) and implement (i.e., build, test, operate, update) something, so what would we develop and implement?</p></li>
+<li><p><strong>Under uncertqainty</strong> means possibly, maybe, and more exacting, probably</p></li>
+</ul>
+<p><strong>Knowledge</strong> is not just</p>
+<ul>
+<li><p>taking a look: knowing <strong>about</strong> some_thing_ or action</p></li>
+<li><p>understanding: describing, explaining, knowing <strong>how</strong></p></li>
+</ul>
+<p>These are components of knowledge, but we want results, we want a <strong>judgment</strong> that is reasonable after weighing the pros and cons and consulting our priorities! Our definition of knowledge is formally <strong>justified true belief</strong> <a href="http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0172%3Atext%3DTheaet.%3Asection%3D210a">see Plato’s <em>Theaetetus 210a-b</em> for details!</a>):</p>
+<ul>
+<li><p>A truth-claim and certitude that something is or not (probably),</p></li>
+<li><p>That is based on available evidence against justified true belief</p></li>
+<li><p>as well as relevant methodology</p></li>
+</ul>
+<p>Knowledge thus includes truth-claims that we are aware of this or that and might even understand how they came about.</p>
+<ul>
+<li><p>Above all knowledge is an assertion and thus we can expect the judgment (assertion or claim) to be justified (warranted) or not depending on the evidence.</p></li>
+<li><p>Judgment is a conscious activity based on meaning: thus something that can be thought about, deliberated, doubted, entertained as a hypothesis, and believed to be true.</p></li>
+<li><p>We move from knowing about (description and explanation) to knowing how (using a conceptual framework) to knowing that something is TRUE or FALSE (what any proposition is).</p></li>
+<li><p>With uncertainty about the future we append **probably* TRUE or FALSE.</p></li>
+</ul>
+<p>Note that your <em>opinion</em> is not <em>knowledge</em>. Beliefs are to be ever challenged by evidence, inquiry, investigation, and the discovering of new relationships and systems. Opinion, true or not, is relative to you. Knowledge moves from something just relative to you to the real relationships among things other than you and your brilliant ideas. Having said this, opinion is still a valuable entree into any investigation and may even be part of the data collection you use to investigate a question, a doubt, an hypothesis, or a belief.</p>
+</div>
+</div>
+<div id="lets-learn-some-more-from-this-example" class="section level2">
+<h2>Let’s learn some more from this example:</h2>
+<p>Overall for the purposes of statistical reasoning there are always three broad components of knowledge and a product:</p>
+<ol style="list-style-type: decimal">
+<li><p>Data collection: results in observations, data, imagination, memory, perception</p></li>
+<li><p>Data analysis: results in description and explanation including logic, relations, classification, association, measurement, hypothesis formation, testing in the presence of potential error</p></li>
+<li><p>Results: the product is an affirmation based on an inference that something is or is not backed by 1 and 2</p></li>
+</ol>
+<p>Suppose that we have data on the incomes of 1000 U.S. families in 2009.</p>
+<ul>
+<li><p>This data can be summarized by finding the average family income and the spread of these family incomes above and below the average.</p></li>
+<li><p>The data also can be depicted by constructing a table, chart, or graph of the number or proportion of
+families in each income class or subsetted (filtered) by state of household residence.</p></li>
+<li><p>We propose to test our concept of the level of the family income in the US overall.</p></li>
+</ul>
+<p>Is this last statement descriptive or inferential?",</p>
+<ol style="list-style-type: decimal">
+<li><p>It is explanatory because it calculates the proportion of families in each income class.</p></li>
+<li><p>It is descriptive because of the calculate of average family income.</p></li>
+<li><p>It is inferential because we can test whether family income in the US is above the average</p></li>
+</ol>
+<br>
+<button class="toggle" onclick="showText('myDIV1')">Show</button>
+<div id="myDIV1" class="boxed" style="display:none;">
+<p><br></p>
+<p>Answer:</p>
+<ol start="3" style="list-style-type: decimal">
+<li>It is inferential because we can test whether family income in the US is above the average</li>
+</ol>
+</div>
+<p><br></p>
+<p>Now suppose we test our hypothesis that family income in the state of Nebraska is less than average family income in the U.S.</p>
+<ul>
+<li><p>We find a non-negligible and significant difference with a probability that we are wrong about our conclusion is only 1%. We believe that 1% is tolerable.</p></li>
+<li><p>Based on our data, our methodology, our tolerance for error, we affirm that family income in Nebraska is less than the average family income in the U.S.</p></li>
+</ul>
+<p>Is this last statement knowledge or just your considered opinion?</p>
+<ol style="list-style-type: decimal">
+<li><p>It is considered opinion.</p></li>
+<li><p>It is knowledge.</p></li>
+<li><p>It is neither.</p></li>
+</ol>
+<br>
+<button class="toggle" onclick="showText('myDIV2')">Show</button>
+<div id="myDIV2" class="boxed" style="display:none;">
+<p><br></p>
+<p>Answer:</p>
+<p>Not 1: Ask if the final result is verified in the data, nut just your conceptual framework.</p>
+<p>Not 3: Try again!</p>
+<p>The correct answer is 2.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>The result derives from a set of facts, and using relevant methodology, along with an allowance for begin wrong, thus verifiable as objectively as possible.</li>
+</ol>
+</div>
+<p><br></p>
+<p>Now suppose we wake up in 10 years and collect more data, use an improved methodology, a lower tolerance for error, and eventually affirm that we were wrong about.</p>
+<p>We conclude we are wrong in 10 years. Does this invalidate our conclusions 10 years ago necessarily?</p>
+<ol style="list-style-type: decimal">
+<li><p>Yes, because the conclusion 10 years ago was, from today’s point of view, just considered opinion.</p></li>
+<li><p>No, knowledge can change from time to time. In fact the conclusions of prior years are new data for a new investigation and in this case a new judgment about average family income.</p></li>
+<li><p>It is neither.</p></li>
+</ol>
+<br>
+<button class="toggle" onclick="showText('myDIV3')">Show</button>
+<div id="myDIV3" class="boxed" style="display:none;">
+<p><br></p>
+<p>Answer:</p>
+<ol start="2" style="list-style-type: decimal">
+<li>The result 10 years ago derived from a set of facts, and using relevant methodology, along with an allowance for begin wrong, thus verifiable as objectively as possible. Circumstances change and so might our inferences and thus our judgments.</li>
+</ol>
+<p>Not 1: What it only an opinion then? Why? Wasn’t it verified in the data and thus a justified true belief?</p>
+<p>Certainly not 3.</p>
+</div>
+<p><br></p>
+<div id="why" class="section level3">
+<h3>Why?</h3>
+<p>We have both descriptions and explanations through inferences of the sample of family incomes. We do have</p>
+<ul>
+<li><p>knowledge about family incomes</p></li>
+<li><p>knowledge of the relationships of family incomes as explanatory above and below an average</p></li>
+</ul>
+<p>This is the domain of descriptive statistics. However,</p>
+<ul>
+<li><p>We might even be able to affirm with probability that family incomes are far or not far above the average income</p></li>
+<li><p>Since these conclusions are subject to error, we also would have to indicate the probability of error.</p></li>
+</ul>
+<p>These statements belong to the domain of statistical inference. This domain pushes us to an affirmation that family income in one subset of the data is less than average family income in the U.S. This affirmation is built on a bridge from data to judgment using a conceptual framework and tolerance for error.</p>
+</div>
+</div>
+<div id="digging-deeper" class="section level2">
+<h2>Digging deeper</h2>
+<div id="learn-by-doing-this" class="section level3">
+<h3>Learn by doing this</h3>
+<p>You work for as an intern for a research department of a real estate developer.</p>
+<p>Which is the best example of knowledge?</p>
+<ol style="list-style-type: decimal">
+<li><p>50 observations of a group of business analysts,</p></li>
+<li><p>The steps analysts take to perform a task,</p></li>
+<li><p>Most of the time between 40-50% of the analysts show up for work on time.</p></li>
+</ol>
+<br>
+<button class="toggle" onclick="showText('myDIV4')">Show</button>
+<div id="myDIV4" class="boxed" style="display:none;">
+<p><br></p>
+<ol start="3" style="list-style-type: decimal">
+<li>You have made a probable assertion. From your and other points of view this is an example of justified true belief – knowledge.</li>
+</ol>
+</div>
+<p><br></p>
+<div id="refs" class="references">
+<div id="ref-Lonergan_1970">
+<p>Lonergan, Bernard J. F. 1970. <em>Insight: A Study of Human Understanding</em>. Philosophical Library.</p>
+</div>
+<div id="ref-Potter_1994">
+<p>Potter, Vincent G. 1994. <em>On Understanding Understanding – 2nd Ed.</em> Fordham University Press. <a href="https://www.fordhampress.com/9780823214860/on-understanding-understanding/">https://www.fordhampress.com/9780823214860/on-understanding-understanding/</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>See <span class="citation">Potter (1994)</span>, Introduction regarding truth, error, and certitude and <span class="citation">Lonergan (1970)</span>, chapters 6 and 7 for detailed accounts of the sources and implications of bias.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+    </div>
+  </article>
+
+  <div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://wgfoote-github-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" width="22" height="22"></a>
+            
+             
+            <a href="https://bookdown.org/yihui/blogdown/" class="footer-links-kudos"> using <img src="/images/blogdown-logo.png" width="22" height="22"></a>
+            
+            
+            <a href="https://bookdown.org/yihui/blogdown/" class="footer-links-kudos"> modified (sometimes extensively) by <img src="/images/logo.png" width="22" height="22"></a>
+          </li>
+          <li>
+            <a href="https://github.com/wgfoote" class="footer-links-kudos">Copyright 2020 William G. Foote, all rights reserved.</a>
+          </li>
+          
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+
+    
+  </body>
+</html>
+
