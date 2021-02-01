@@ -1,0 +1,240 @@
+---
+title: Gibbs Coal Mining Disasters
+author: Bill Foote
+date: '2021-01-3'
+slug: gibbs-coal-mining-disasters
+categories:
+  - Statistics
+tags:
+  - R
+  - MCMC
+bibliography:
+  - book.bib
+output:
+  blogdown::html_page:
+    toc: yes
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#disasters-in-the-mines">Disasters in the mines</a><ul>
+<li><a href="#a-model-emerges-from-the-depths">A model emerges from the depths</a></li>
+<li><a href="#gibbs-sampler-for-the-coal-mining-change-point">Gibbs sampler for the coal mining change point</a></li>
+</ul></li>
+<li><a href="#what-happened-around-1890">What happened around 1890?</a></li>
+<li><a href="#session-info">Session Info</a></li>
+<li><a href="#references-and-endnotes">References and endnotes</a></li>
+</ul>
+</div>
+
+<div id="disasters-in-the-mines" class="section level2">
+<h2>Disasters in the mines</h2>
+<p>The package <code>boot</code> contains the dates of coal mining disasters from 1851 to 1962.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<pre class="r"><code>library(boot)     #for coal data
+data(coal)
+year &lt;- floor(coal)
+y &lt;- table(year)
+plot(y)  #a very simple time series plot</code></pre>
+<p><img src="/post/2021-01-30-gibbs-coal-mining-disasters_files/figure-html/coal-intro-1.png" width="672" /></p>
+<pre class="r"><code>y</code></pre>
+<pre><code>## year
+## 1851 1852 1853 1854 1856 1857 1858 1860 1861 1862 1863 1865 1866 1867 1868 1869 
+##    4    5    4    1    4    3    4    6    3    3    4    2    6    3    3    5 
+## 1870 1871 1872 1873 1874 1875 1876 1877 1878 1879 1880 1881 1882 1883 1884 1885 
+##    4    5    3    1    4    4    1    5    5    3    4    2    5    2    2    3 
+## 1886 1887 1888 1889 1890 1891 1892 1893 1894 1895 1896 1899 1901 1902 1905 1906 
+##    4    2    1    3    2    2    1    1    1    1    3    1    1    1    3    1 
+## 1908 1909 1910 1912 1913 1914 1916 1918 1922 1923 1927 1928 1930 1931 1932 1933 
+##    3    2    2    1    1    1    1    1    2    1    1    1    2    3    3    1 
+## 1934 1935 1936 1937 1938 1939 1940 1941 1942 1946 1947 1951 1957 1960 1962 
+##    1    2    1    1    1    1    2    3    3    1    4    1    1    1    1</code></pre>
+<p>The plot shows a marked difference in the frequency of disasters before the 1890’s and after. We use the <code>[[]]</code> operator to convert the data frame into a simple numerical series then take the floor of the series to isolate the integer years. The <code>tabulate()</code> function will count the number of disasters for each year. We will only need the tail of the tabulation from 1851 onward.</p>
+<pre class="r"><code>y &lt;- floor(coal[[1]])
+y &lt;- tabulate(y)
+y &lt;- y[1851:length(y)]
+n &lt;- length(y)
+n</code></pre>
+<pre><code>## [1] 112</code></pre>
+<div id="a-model-emerges-from-the-depths" class="section level3">
+<h3>A model emerges from the depths</h3>
+<p>The frequency of disasters, and other rare events, is often modelled with the Poisson distribution. We let <span class="math inline">\(Y_i\)</span> be the number of disasters in year <span class="math inline">\(i\)</span>, for <span class="math inline">\(i=i,\cdots,n\)</span>, with $n = $ 112. The switch point <span class="math inline">\(k\)</span> will indicate the index of the year when the Poisson distribution intensity switches from <span class="math inline">\(\mu\)</span> to <span class="math inline">\(\lambda\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+Y_i &amp;\sim \operatorname{Poisson}(\mu). &amp;i=1, \ldots, k, \\
+Y_i &amp;\sim \operatorname{Poisson}(\lambda). &amp;i=k+1, \ldots, n. \\
+\end{align}
+\]</span></p>
+<p>We might expect the switch point <code>k</code> to be a simple unknown following an uninformative uniform distribution. We could expect the <span class="math inline">\(mu\)</span> and <span class="math inline">\(\lambda\)</span> free parameters to follow independent Gamma distributions following actuarial practice.</p>
+<p><span class="math display">\[
+\begin{align}
+k &amp;\sim \operatorname{Uniform}(1,\ldots,n), \\
+\mu &amp;\sim \operatorname{Gamma}(0.5, b_1), \\
+\lambda &amp;\sim \operatorname{Gamma}(0.5, b_2). 
+\end{align}
+\]</span>
+The Gamma shapes are just 0.50, but we need to introduce the <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> rates to ensure that the rates are positive multiples of chi-squared distributions. After all, the right-skewed chi-squared distribution seems favored by variables that claim to model volatility. These parameters are fully conditioned on each other on just about everything else in this specification.</p>
+<p><span class="math display">\[
+\begin{align}
+b_1 \mid Y, \mu, \lambda, b_2, k &amp;\sim \operatorname{Gamma}(0.5, \mu+1) \\
+b_1 \mid Y, \mu, \lambda, b_1, k &amp;\sim \operatorname{Gamma}(0.5,\lambda+1)
+\end{align}
+\]</span></p>
+<p>The plus 1 rates in the Gamma priors will iterate from an initial estimate of <span class="math inline">\(\mu\)</span> or <span class="math inline">\(\lambda\)</span> by adding 1 on each iteration. After all these are all average counts of disasters per year. All of this conditioning effectively creates cross-distribution constraints. In fact, we need to re-express the <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\lambda\)</span> priors conditionally as well in order to allow the counting of the ways in which the switch point <span class="math inline">\(k\)</span> might evolve when we confront data <span class="math inline">\(Y_i\)</span>. We carry out this confrontation by summing disasters from year 1 to (as yet not known) <span class="math inline">\(k\)</span> so that</p>
+<p><span class="math display">\[
+S_k = \Sigma_1^k Y_i
+\]</span>
+and from <span class="math inline">\(k+1\)</span> to <span class="math inline">\(n\)</span> as</p>
+<p><span class="math display">\[
+\Sigma_{k+1}^n Y_i = \Sigma_{1}^n Y_i - S_k = S_n -S_k 
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+\mu \mid Y, \lambda, b_1, b_2, k &amp;\sim \operatorname{Gamma}(0.5 + S_k, b_1 + k) \\
+\lambda \mid Y, \mu, b_1, b_2, k &amp;\sim \operatorname{Gamma}(0.5 + (S_n-S_k), b_2 + n-k)
+\end{align}
+\]</span></p>
+<p>We still need a likelihood function <span class="math inline">\(L\)</span> to carry out the rest of the routine. <span class="math inline">\(L\)</span> is the probability that the hypothesized parameter <span class="math inline">\(k\)</span> is consistent with the data as well as the expectations about the parameters that criss-cross this problem. The two Poisson distributions that we began our analysis with have together an implicit switch point. However, we need a data likelihood that is explicitly sensitive to the switching point. This point acts like a threshold in dividing the sample into two regimes. A distribution with this property is the <a href="https://en.wikipedia.org/wiki/Pareto_distribution">Pareto distribution</a>. We will use this likelihood instead of the two Poissons we started with.</p>
+<p><span class="math display">\[
+L(Y \mid \mu, \lambda, k) = e^{(\lambda - \mu)} \left( \frac{\mu}{\lambda} \right)^{S_k}
+\]</span>
+The first term is the probability we expect for the difference in the two switching regimes delimited by the sum <span class="math inline">\(S_k\)</span>. The second term is the Pareto power distribution with the probability that we see the data given the frequency of one regime relative to the other. Each term embeds the prior distributions of the hypothesized parameters. Finally we compute a normalized likelihood to generate the posterior distribution <span class="math inline">\(f\)</span> of <span class="math inline">\(k\)</span>.</p>
+<p><span class="math display">\[
+f(k \mid Y, \mu, \lambda, b_1, b_2) = \frac{L(Y \mid \mu, \lambda, k)}{\Sigma_j^n L(Y \mid \mu, \lambda, j)}
+\]</span></p>
+</div>
+<div id="gibbs-sampler-for-the-coal-mining-change-point" class="section level3">
+<h3>Gibbs sampler for the coal mining change point</h3>
+<p>The Gibbs sampler, as described by <span class="citation">Geman and Geman (1984)</span>, attempts to sample each free parameter one at at time using the previous parameters as grist for its mill.</p>
+<p>First we specify the setup.</p>
+<pre class="r"><code># initialize
+n &lt;- length(y)    #length of the data
+m &lt;- 1000         #length of the chain
+mu &lt;- lambda &lt;- k &lt;- numeric(m)
+L &lt;- numeric(n)
+k[1] &lt;- sample(1:n, 1)
+mu[1] &lt;- 1
+lambda[1] &lt;- 1
+b1 &lt;- 1
+b2 &lt;- 1</code></pre>
+<p>Next, we run the sampler.</p>
+<pre class="r"><code>for (i in 2:m) {
+        kt &lt;- k[i-1]  # this is Gibbs: work back from the value at i to the value at i-1
+                      # then go step by step into the layers of each distribution
+                      # the ensemble of layers is the Gibbs lattice
+        # generate mu
+        r &lt;- .5 + sum(y[1:kt])
+        mu[i] &lt;- rgamma(1, shape = r, rate = kt + b1)
+        #generate lambda
+        if (kt + 1 &gt; n) r &lt;- .5 + sum(y) else
+            r &lt;- .5 + sum(y[(kt+1):n])
+        lambda[i] &lt;- rgamma(1, shape = r, rate = n - kt + b2)
+        # generate new b1 and b2 for the next iteration
+        # this is where the averages get incremented
+        b1 &lt;- rgamma(1, shape = .5, rate = mu[i]+1)
+        b2 &lt;- rgamma(1, shape = .5, rate = lambda[i]+1)
+        # generate a sampled likelihood and normalize it
+        for (j in 1:n) {
+            L[j] &lt;- exp((lambda[i] - mu[i]) * j) *
+                          (mu[i] / lambda[i])^sum(y[1:j])
+            }
+        L &lt;- L / sum(L)
+        # generate a single k at iteration i from the discrete distribution L on 1:n
+        k[i] &lt;- sample(1:n, prob=L, size=1)
+    }</code></pre>
+<p>Let’s see some results. First we strip out the first 200 burn-in runs. Then we calculate arithmetic means of <span class="math inline">\(k\)</span>, <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\lambda\)</span>.</p>
+<pre class="r"><code>library(tidybayes)
+b &lt;- 201
+j &lt;- k[b:m]
+mean(k[b:m])</code></pre>
+<pre><code>## [1] 39.89</code></pre>
+<pre class="r"><code>mean(lambda[b:m])</code></pre>
+<pre><code>## [1] 0.9233123</code></pre>
+<pre class="r"><code>mean(mu[b:m])</code></pre>
+<pre><code>## [1] 3.125029</code></pre>
+<pre class="r"><code>mode_hdci(k)</code></pre>
+<pre><code>##    y ymin ymax .width .point .interval
+## 1 41   34   44   0.95   mode      hdci</code></pre>
+<pre class="r"><code>hist(k)</code></pre>
+<p><img src="/post/2021-01-30-gibbs-coal-mining-disasters_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>The stochastic switch point occurs at year 40 or year 1890. Prior to this year, on average there were 3 disasters per year. After this year there was 1 disaster per year. There is a 95% probability that the model is compatible with the data between the years 1886 through 1896.</p>
+</div>
+</div>
+<div id="what-happened-around-1890" class="section level2">
+<h2>What happened around 1890?</h2>
+<p>In 1891, Congress passed the first federal statute governing mine safety. The <a href="https://web.archive.org/web/20130218074218/http://www.msha.gov/mshainfo/mshainf2.htm">1891 law</a> applied only to mines in U.S. territories, and, among other things, established minimum ventilation requirements at underground coal mines and prohibited operators from employing children under 12 years of age. The model accurately identifies the stochastic switch point as the year before this legislation.</p>
+<p>From 1900 to 1910, the number of coal mine fatalities exceeded 2,000 annually. Congress established the Bureau of Mines as an agency in the Department of the Interior. The Bureau was charged with the responsibility to conduct research and to reduce accidents in the coal mining industry. Inspection authority was granted in 1941.</p>
+<p>The Federal Coal Mine Safety Act of 1952 provided for annual inspections and gave the Bureau of Mines limited enforcement authority, including power to issue violation notices and imminent danger withdrawal orders. The 1952 Act also authorized the assessment of civil penalties against mine operators for noncompliance with withdrawal orders or for refusing to give inspectors access to mine property.</p>
+</div>
+<div id="session-info" class="section level2 unnumbered">
+<h2>Session Info</h2>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>## R version 4.0.2 (2020-06-22)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 19041)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=English_United States.1252 
+## [2] LC_CTYPE=English_United States.1252   
+## [3] LC_MONETARY=English_United States.1252
+## [4] LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.1252    
+## 
+## attached base packages:
+## [1] parallel  stats     graphics  grDevices utils     datasets  methods  
+## [8] base     
+## 
+## other attached packages:
+##  [1] tidybayes_2.1.1      boot_1.3-25          rethinking_2.13     
+##  [4] rstan_2.21.2         StanHeaders_2.21.0-6 forcats_0.5.0       
+##  [7] stringr_1.4.0        dplyr_1.0.1          purrr_0.3.4         
+## [10] readr_1.3.1          tidyr_1.1.1          tibble_3.0.3        
+## [13] ggplot2_3.3.2        tidyverse_1.3.0     
+## 
+## loaded via a namespace (and not attached):
+##  [1] matrixStats_0.56.0   fs_1.5.0             lubridate_1.7.9     
+##  [4] httr_1.4.2           tools_4.0.2          backports_1.1.7     
+##  [7] R6_2.4.1             DBI_1.1.0            colorspace_1.4-1    
+## [10] ggdist_2.2.0         withr_2.2.0          tidyselect_1.1.0    
+## [13] gridExtra_2.3        prettyunits_1.1.1    processx_3.4.4      
+## [16] curl_4.3             compiler_4.0.2       cli_2.0.2           
+## [19] rvest_0.3.6          HDInterval_0.2.2     arrayhelpers_1.1-0  
+## [22] xml2_1.3.2           bookdown_0.20        scales_1.1.1        
+## [25] mvtnorm_1.1-1        callr_3.5.1          digest_0.6.25       
+## [28] rmarkdown_2.3        pkgconfig_2.0.3      htmltools_0.5.0     
+## [31] dbplyr_1.4.4         rlang_0.4.7          readxl_1.3.1        
+## [34] rstudioapi_0.11      shape_1.4.4          generics_0.0.2      
+## [37] farver_2.0.3         svUnit_1.0.3         jsonlite_1.7.0      
+## [40] distributional_0.2.1 inline_0.3.15        magrittr_1.5        
+## [43] loo_2.3.1            Rcpp_1.0.5           munsell_0.5.0       
+## [46] fansi_0.4.1          lifecycle_0.2.0      stringi_1.4.6       
+## [49] yaml_2.2.1           MASS_7.3-51.6        plyr_1.8.6          
+## [52] pkgbuild_1.1.0       grid_4.0.2           blob_1.2.1          
+## [55] crayon_1.3.4         lattice_0.20-41      haven_2.3.1         
+## [58] hms_0.5.3            knitr_1.29           ps_1.3.4            
+## [61] pillar_1.4.6         codetools_0.2-16     stats4_4.0.2        
+## [64] reprex_0.3.0         glue_1.4.1           evaluate_0.14       
+## [67] blogdown_0.20        V8_3.2.0             RcppParallel_5.0.2  
+## [70] modelr_0.1.8         vctrs_0.3.2          cellranger_1.1.0    
+## [73] gtable_0.3.0         assertthat_0.2.1     xfun_0.16           
+## [76] broom_0.7.0          coda_0.19-3          ellipsis_0.3.1</code></pre>
+</div>
+<div id="references-and-endnotes" class="section level2 unnumbered">
+<h2>References and endnotes</h2>
+<div id="refs" class="references">
+<div id="ref-GemanStochasticRelaxationGibbs1984">
+<p>Geman, Stuart, and Donald Geman. 1984. “Stochastic Relaxation, Gibbs Distributions, and the Bayesian Restoration of Images.” <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em> PAMI-6 (6): 721–41. <a href="https://doi.org/10.1109/TPAMI.1984.4767596">https://doi.org/10.1109/TPAMI.1984.4767596</a>.</p>
+</div>
+<div id="ref-Rizzo2019">
+<p>Rizzo, Maria L. 2019. <em>Statistical Computing with R, Second Edition</em>. CRC Press.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The model and its implementation very closely follows the one in Chapter 11 of <span class="citation">Rizzo (2019)</span>.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>

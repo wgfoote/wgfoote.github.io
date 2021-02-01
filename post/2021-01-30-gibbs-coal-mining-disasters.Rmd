@@ -1,0 +1,185 @@
+---
+title: Gibbs Coal Mining Disasters
+author: Bill Foote
+date: '2021-01-3'
+slug: gibbs-coal-mining-disasters
+categories:
+  - Statistics
+tags:
+  - R
+  - MCMC
+bibliography:
+  - book.bib
+output:
+  blogdown::html_page:
+    toc: yes
+---
+
+```{r setup-gibbs, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE)
+library(tidyverse)
+library(rethinking)
+```
+
+## Disasters in the mines
+
+The package `boot` contains the dates of coal mining disasters from 1851 to 1962.[^rizzo]
+
+[^rizzo]: The model and its implementation very closely follows the one in Chapter 11 of @Rizzo2019.
+
+```{r coal-intro}
+library(boot)     #for coal data
+data(coal)
+year <- floor(coal)
+y <- table(year)
+plot(y)  #a very simple time series plot
+y
+```
+
+The plot shows a marked difference in the frequency of disasters before the 1890's and after. We use the `[[]]` operator to convert the data frame into a simple numerical series then take the floor of the series to isolate the integer years. The `tabulate()` function will count the number of disasters for each year. We will only need the tail of the tabulation from 1851 onward.
+
+```{r}
+y <- floor(coal[[1]])
+y <- tabulate(y)
+y <- y[1851:length(y)]
+n <- length(y)
+n
+```
+
+### A model emerges from the depths
+
+The frequency of disasters, and other rare events, is often modelled with the Poisson distribution. We let $Y_i$ be the number of disasters in year $i$, for $i=i,\cdots,n$, with $n = $ `r n`. The switch point $k$ will indicate the index of the year when the Poisson distribution intensity switches from $\mu$ to $\lambda$.
+
+$$
+\begin{align}
+Y_i &\sim \operatorname{Poisson}(\mu). &i=1, \ldots, k, \\
+Y_i &\sim \operatorname{Poisson}(\lambda). &i=k+1, \ldots, n. \\
+\end{align}
+$$
+
+We might expect the switch point `k` to be a simple unknown following an uninformative uniform distribution. We could expect the $mu$ and $\lambda$ free parameters to follow independent Gamma distributions following actuarial practice.
+
+$$
+\begin{align}
+k &\sim \operatorname{Uniform}(1,\ldots,n), \\
+\mu &\sim \operatorname{Gamma}(0.5, b_1), \\
+\lambda &\sim \operatorname{Gamma}(0.5, b_2). 
+\end{align}
+$$
+The Gamma shapes are just 0.50, but we need to introduce the $b_1$ and $b_2$ rates to ensure that the rates are positive multiples of chi-squared distributions. After all, the right-skewed chi-squared distribution seems favored by variables that claim to model volatility. These parameters are fully conditioned on each other on just about everything else in this specification.
+
+$$
+\begin{align}
+b_1 \mid Y, \mu, \lambda, b_2, k &\sim \operatorname{Gamma}(0.5, \mu+1) \\
+b_1 \mid Y, \mu, \lambda, b_1, k &\sim \operatorname{Gamma}(0.5,\lambda+1)
+\end{align}
+$$
+
+The plus 1 rates in the Gamma priors will iterate from an initial estimate of $\mu$ or $\lambda$ by adding 1 on each iteration. After all these are all average counts of disasters per year. All of this conditioning effectively creates cross-distribution constraints. In fact, we need to re-express the $\mu$ and $\lambda$ priors conditionally as well in order to allow the counting of the ways in which the switch point $k$ might evolve when we confront data $Y_i$. We carry out this confrontation by summing disasters from year 1 to (as yet not known) $k$ so that 
+
+$$
+S_k = \Sigma_1^k Y_i
+$$
+and from $k+1$ to $n$ as
+
+$$
+\Sigma_{k+1}^n Y_i = \Sigma_{1}^n Y_i - S_k = S_n -S_k 
+$$
+
+$$
+\begin{align}
+\mu \mid Y, \lambda, b_1, b_2, k &\sim \operatorname{Gamma}(0.5 + S_k, b_1 + k) \\
+\lambda \mid Y, \mu, b_1, b_2, k &\sim \operatorname{Gamma}(0.5 + (S_n-S_k), b_2 + n-k)
+\end{align}
+$$
+
+
+We still need a likelihood function $L$ to carry out the rest of the routine. $L$ is the probability that the hypothesized parameter $k$ is consistent with the data as well as the expectations about the parameters that criss-cross this problem. The two Poisson distributions that we began our analysis with have together an implicit switch point. However, we need a data likelihood that is explicitly sensitive to the switching point. This point acts like a threshold in dividing the sample into two regimes. A distribution with this property is the [Pareto distribution](https://en.wikipedia.org/wiki/Pareto_distribution). We will use this likelihood instead of the two Poissons we started with.
+
+$$
+L(Y \mid \mu, \lambda, k) = e^{(\lambda - \mu)} \left( \frac{\mu}{\lambda} \right)^{S_k}
+$$
+The first term is the probability we expect for the difference in the two switching regimes delimited by the sum $S_k$. The second term is the Pareto power distribution with the probability that we see the data given the frequency of one regime relative to the other. Each term embeds the prior distributions of the hypothesized parameters. Finally we compute a normalized likelihood to generate the posterior distribution $f$ of $k$. 
+
+$$
+f(k \mid Y, \mu, \lambda, b_1, b_2) = \frac{L(Y \mid \mu, \lambda, k)}{\Sigma_j^n L(Y \mid \mu, \lambda, j)}
+$$
+
+### Gibbs sampler for the coal mining change point
+
+The Gibbs sampler, as described by @GemanStochasticRelaxationGibbs1984, attempts to sample each free parameter one at at time using the previous parameters as grist for its mill.
+
+First we specify the setup.
+
+```{r}
+# initialize
+n <- length(y)    #length of the data
+m <- 1000         #length of the chain
+mu <- lambda <- k <- numeric(m)
+L <- numeric(n)
+k[1] <- sample(1:n, 1)
+mu[1] <- 1
+lambda[1] <- 1
+b1 <- 1
+b2 <- 1
+```
+
+Next, we run the sampler.
+
+```{r}
+for (i in 2:m) {
+        kt <- k[i-1]  # this is Gibbs: work back from the value at i to the value at i-1
+                      # then go step by step into the layers of each distribution
+                      # the ensemble of layers is the Gibbs lattice
+        # generate mu
+        r <- .5 + sum(y[1:kt])
+        mu[i] <- rgamma(1, shape = r, rate = kt + b1)
+        #generate lambda
+        if (kt + 1 > n) r <- .5 + sum(y) else
+            r <- .5 + sum(y[(kt+1):n])
+        lambda[i] <- rgamma(1, shape = r, rate = n - kt + b2)
+        # generate new b1 and b2 for the next iteration
+        # this is where the averages get incremented
+        b1 <- rgamma(1, shape = .5, rate = mu[i]+1)
+        b2 <- rgamma(1, shape = .5, rate = lambda[i]+1)
+        # generate a sampled likelihood and normalize it
+        for (j in 1:n) {
+            L[j] <- exp((lambda[i] - mu[i]) * j) *
+                          (mu[i] / lambda[i])^sum(y[1:j])
+            }
+        L <- L / sum(L)
+        # generate a single k at iteration i from the discrete distribution L on 1:n
+        k[i] <- sample(1:n, prob=L, size=1)
+    }
+```
+
+Let's see some results. First we strip out the first 200 burn-in runs. Then we calculate arithmetic means of $k$, $\mu$ and $\lambda$.
+
+```{r}
+library(tidybayes)
+b <- 201
+j <- k[b:m]
+mean(k[b:m])
+mean(lambda[b:m])
+mean(mu[b:m])
+mode_hdci(k)
+hist(k)
+```
+
+The stochastic switch point occurs at year `r round(mean(k[b:m],0))` or year `r 1850+round(mean(k[b:m],0))`. Prior to this year, on average there were 3 disasters per year. After this year there was 1 disaster per year. There is a 95\% probability that the model is compatible with the data between the years 1886 through 1896.
+
+## What happened around 1890?
+
+In 1891, Congress passed the first federal statute governing mine safety. The [1891 law](https://web.archive.org/web/20130218074218/http://www.msha.gov/mshainfo/mshainf2.htm) applied only to mines in U.S. territories, and, among other things, established minimum ventilation requirements at underground coal mines and prohibited operators from employing children under 12 years of age. The model accurately identifies the stochastic switch point as the year before this legislation.
+
+From 1900 to 1910, the number of coal mine fatalities exceeded 2,000 annually. Congress established the Bureau of Mines as an agency in the Department of the Interior. The Bureau was charged with the responsibility to conduct research and to reduce accidents in the coal mining industry. Inspection authority was granted in 1941.
+
+The Federal Coal Mine Safety Act of 1952 provided for annual inspections and gave the Bureau of Mines limited enforcement authority, including power to issue violation notices and imminent danger withdrawal orders. The 1952 Act also authorized the assessment of civil penalties against mine operators for noncompliance with withdrawal orders or for refusing to give inspectors access to mine property.
+
+## Session Info {-}
+
+```{r}
+sessionInfo()
+```
+
+## References and endnotes
