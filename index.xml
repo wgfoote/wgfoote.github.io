@@ -13,6 +13,15 @@
     
     
     <item>
+      <title>Gibbs Coal Mining Disasters</title>
+      <link>/2021/01/03/gibbs-coal-mining-disasters/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/01/03/gibbs-coal-mining-disasters/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>There&#39;s logic behind that inference</title>
       <link>/2020/07/05/there-s-logic-behind-that-inference/</link>
       <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
@@ -62,16 +71,6 @@ During my career, I helped to build an energy and environment practice in Europe
 Art – its practice, influences, history
 Linguistics – especially indo-european and semitic languages
 Anything else – as all knowledge is fair game</description>
-    </item>
-    
-    <item>
-      <title>Gibbs Coal Mining Disasters</title>
-      <link>/1/01/01/gibbs-coal-mining-disasters/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/1/01/01/gibbs-coal-mining-disasters/</guid>
-      <description>Disasters in the minesA model emerges from the depthsGibbs sampler for the coal mining change pointWhat happened around 1890?Session InfoReferences and endnotesDisasters in the minesThe package boot contains the dates of coal mining disasters from 1851 to 1962.1
-library(boot) #for coal datadata(coal)year &amp;lt;- floor(coal)y &amp;lt;- table(year)plot(y) #a very simple time series ploty## year## 1851 1852 1853 1854 1856 1857 1858 1860 1861 1862 1863 1865 1866 1867 1868 1869 ## 4 5 4 1 4 3 4 6 3 3 4 2 6 3 3 5 ## 1870 1871 1872 1873 1874 1875 1876 1877 1878 1879 1880 1881 1882 1883 1884 1885 ## 4 5 3 1 4 4 1 5 5 3 4 2 5 2 2 3 ## 1886 1887 1888 1889 1890 1891 1892 1893 1894 1895 1896 1899 1901 1902 1905 1906 ## 4 2 1 3 2 2 1 1 1 1 3 1 1 1 3 1 ## 1908 1909 1910 1912 1913 1914 1916 1918 1922 1923 1927 1928 1930 1931 1932 1933 ## 3 2 2 1 1 1 1 1 2 1 1 1 2 3 3 1 ## 1934 1935 1936 1937 1938 1939 1940 1941 1942 1946 1947 1951 1957 1960 1962 ## 1 2 1 1 1 1 2 3 3 1 4 1 1 1 1The plot shows a marked difference in the frequency of disasters before the 1890’s and after.</description>
     </item>
     
   </channel>
