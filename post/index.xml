@@ -7,18 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2020-21 William G. Foote</copyright>
-    <lastBuildDate>Fri, 03 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>There&#39;s logic behind that inference</title>
-      <link>/2020/07/03/there-s-logic-behind-that-inference/</link>
-      <pubDate>Fri, 03 Jul 2020 00:00:00 +0000</pubDate>
+      <title>Gibbs Coal Mining Disasters</title>
+      <link>/2021/01/03/gibbs-coal-mining-disasters/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>/2020/07/03/there-s-logic-behind-that-inference/</guid>
-      <description>Welcome to Statistical ReasoningWhy do we reason statistically?What is statisical reasoning?Let’s learn some more from this example:Why?Digging deeperLearn by doing thisInferDeductive reasoning: conclusion guaranteedInductive reasoning: conclusion merely likelyAbductive reasoning: taking your best shotCritical thinkingReferences and Endnotes.boxed {border: 5px solid green;border-radius: 5px;padding: 50px;margin: 20px;background-color: #f8f8fa}button{color: white;background-color: green; /* Remove background color */border: 2px solid green; /* Border thickness, line style, and color */*/border-radius: 5px; /* Adds curve to border corners */*/text-transform: uppercase; /* Make letters uppercase */}function showText(y) {var button = document.</description>
+      <guid>/2021/01/03/gibbs-coal-mining-disasters/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>There&#39;s logic behind that inference</title>
+      <link>/2020/07/05/there-s-logic-behind-that-inference/</link>
+      <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/07/05/there-s-logic-behind-that-inference/</guid>
+      <description>To learn is to inferDeductive reasoning: conclusion guaranteedInductive reasoning: conclusion merely likelyAbductive reasoning: taking your best shotCritical thinkingReferences and Endnotes.boxed {border: 5px solid green;border-radius: 5px;padding: 50px;margin: 20px;background-color: #f8f8fa}button{color: white;background-color: green; /* Remove background color */border: 2px solid green; /* Border thickness, line style, and color */*/border-radius: 5px; /* Adds curve to border corners */*/text-transform: uppercase; /* Make letters uppercase */}function showText(y) {var button = document.</description>
     </item>
     
     <item>

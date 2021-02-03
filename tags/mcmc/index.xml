@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MCMC on varium et mutabile</title>
+    <link>/tags/mcmc/</link>
+    <description>Recent content in MCMC on varium et mutabile</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2020-21 William G. Foote</copyright>
+    <lastBuildDate>Sun, 03 Jan 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/mcmc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Gibbs Coal Mining Disasters</title>
+      <link>/2021/01/03/gibbs-coal-mining-disasters/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/01/03/gibbs-coal-mining-disasters/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

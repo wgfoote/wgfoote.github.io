@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hypothsis Testing on varium et mutabile</title>
+    <link>/tags/hypothsis-testing/</link>
+    <description>Recent content in Hypothsis Testing on varium et mutabile</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2020-21 William G. Foote</copyright>
+    <lastBuildDate>Sun, 05 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/hypothsis-testing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>There&#39;s logic behind that inference</title>
+      <link>/2020/07/05/there-s-logic-behind-that-inference/</link>
+      <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/07/05/there-s-logic-behind-that-inference/</guid>
+      <description>To learn is to inferDeductive reasoning: conclusion guaranteedInductive reasoning: conclusion merely likelyAbductive reasoning: taking your best shotCritical thinkingReferences and Endnotes.boxed {border: 5px solid green;border-radius: 5px;padding: 50px;margin: 20px;background-color: #f8f8fa}button{color: white;background-color: green; /* Remove background color */border: 2px solid green; /* Border thickness, line style, and color */*/border-radius: 5px; /* Adds curve to border corners */*/text-transform: uppercase; /* Make letters uppercase */}function showText(y) {var button = document.</description>
+    </item>
+    
+  </channel>
+</rss>
